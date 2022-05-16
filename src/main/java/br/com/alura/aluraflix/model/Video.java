@@ -2,8 +2,18 @@ package br.com.alura.aluraflix.model;
 
 import java.util.Objects;
 
-public class Video {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="video")
+public class Video {
+	
+	@Id 
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String titulo;
 	private String descricao;
@@ -25,15 +35,6 @@ public class Video {
 		Video other = (Video) obj;
 		return Objects.equals(descricao, other.descricao) && Objects.equals(id, other.id)
 				&& Objects.equals(titulo, other.titulo) && Objects.equals(url, other.url);
-	}
-
-	public Video() {
-	}
-	
-	public Video(String titulo, String descricao, String url) {
-		this.titulo = titulo;
-		this.descricao = descricao;
-		this.url = url;
 	}
 
 	public Long getId() {
@@ -66,6 +67,11 @@ public class Video {
 
 	public void setUrl(String url) {
 		this.url = url;
+	}
+
+	@Override
+	public String toString() {
+		return "Video [id=" + id + ", titulo=" + titulo + ", descricao=" + descricao + ", url=" + url + "]";
 	}
 
 }
