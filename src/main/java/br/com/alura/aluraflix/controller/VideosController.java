@@ -4,21 +4,26 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.alura.aluraflix.dto.VideoDto;
-import br.com.alura.aluraflix.model.Video;
-import br.com.alura.aluraflix.repository.VideoRepository;
+import br.com.alura.aluraflix.service.VideoService;
 
 @RestController
 public class VideosController {
 	
 	@Autowired
-	private VideoRepository videoRepository;
+	private VideoService videoService;
 	
 	@GetMapping("/videos")
 	public List<VideoDto> getAllVideos() {
-		List<Video> videos = videoRepository.findAll();
-		return VideoDto.converter(videos);
+		List<VideoDto> videos = videoService.getAll();
+		return videos;
+	}
+	
+	@GetMapping("/videos/{id}")
+	public VideoDto getVideo(@PathVariable Long id) {
+		return videoService.findById(id);
 	}
 }

@@ -12,6 +12,9 @@ public class VideoDto {
 	private String descricao;
 	private String url;
 	
+	public VideoDto() {
+	}
+
 	public VideoDto(Video video) {
 		this.id = video.getId();
 		this.titulo = video.getTitulo();
@@ -34,9 +37,34 @@ public class VideoDto {
 	public String getUrl() {
 		return url;
 	}
-
-	public static List<VideoDto> converter(List<Video> videos) {
-		return videos.stream().map(VideoDto::new).collect(Collectors.toList());
+	
+	public void setId(Long id) {
+		this.id = id;
 	}
 
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public static VideoDto converter(Video video) {
+		VideoDto videoDTO = new VideoDto();
+		videoDTO.setId(video.getId());
+		videoDTO.setTitulo(video.getTitulo());
+		videoDTO.setDescricao(video.getDescricao());
+		videoDTO.setUrl(video.getUrl());
+		return videoDTO;
+	}
+
+	public static List<VideoDto> converterLista(List<Video> videos) {
+		return videos.stream().map(VideoDto::new).collect(Collectors.toList());
+	}
+	
 }
